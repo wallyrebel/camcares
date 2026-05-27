@@ -1453,6 +1453,334 @@ textarea.form-control {
     100% { transform: scale(1); opacity: 0.6; }
 }
 
+
+/* Past Events Section */
+.events-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: rgba(20, 14, 34, 0.6);
+    border: 1px solid var(--cls-card-border);
+    color: var(--cls-text-muted);
+    padding: 0.6rem 1.5rem;
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    backdrop-filter: blur(8px);
+}
+
+.filter-btn:hover {
+    color: var(--cls-text);
+    border-color: rgba(139, 92, 246, 0.6);
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--cls-primary) 0%, var(--cls-primary-dark) 100%);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+}
+
+.event-card {
+    background: var(--cls-card);
+    border: 1px solid var(--cls-card-border);
+    backdrop-filter: blur(8px);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: var(--shadow-premium);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    flex-direction: column;
+    opacity: 1;
+    transform: scale(1);
+}
+
+.event-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.2);
+}
+
+.event-img-container {
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--cls-card-border);
+    background: #06030c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.event-img-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(18px) brightness(0.4);
+    opacity: 0.75;
+    z-index: 1;
+    transform: scale(1.15); /* Prevents white margins from blur filter */
+    pointer-events: none;
+}
+
+.event-img-main {
+    position: relative;
+    z-index: 2;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    padding: 0.5rem;
+}
+
+.event-card:hover .event-img-main {
+    transform: scale(1.03);
+}
+
+.event-body {
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-grow: 1;
+}
+
+.event-date {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--cls-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.event-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.event-desc {
+    color: var(--cls-text-muted);
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.event-highlights {
+    background: rgba(139, 92, 246, 0.05);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.event-highlights h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--cls-text);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.event-highlights ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.event-highlights li {
+    font-size: 0.9rem;
+    color: var(--cls-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.event-highlights li::before {
+    content: "✦";
+    color: var(--cls-accent);
+    font-size: 0.8rem;
+}
+
+.event-highlights strong {
+    color: var(--cls-text);
+    font-weight: 600;
+}
+
+.event-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--cls-primary-light);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    width: fit-content;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 2px;
+}
+
+.event-link:hover {
+    color: var(--cls-accent);
+    border-color: var(--cls-accent);
+}
+
+.event-link svg {
+    transition: transform var(--transition-smooth);
+}
+
+.event-link:hover svg {
+    transform: translate(3px, -3px);
+}
+
+/* Direct Donation Methods */
+.direct-methods {
+    margin-top: 3.5rem;
+    text-align: center;
+}
+
+.direct-methods-title {
+    font-size: 1.1rem;
+    color: var(--cls-text-muted);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.methods-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.method-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    background: var(--cls-card);
+    border: 1px solid var(--cls-card-border);
+    backdrop-filter: blur(12px);
+    padding: 1.25rem 1.75rem;
+    border-radius: 20px;
+    transition: var(--transition-smooth);
+    box-shadow: var(--shadow-premium);
+    position: relative;
+    overflow: hidden;
+}
+
+.method-card svg {
+    margin-left: auto;
+    color: var(--cls-text-muted);
+    transition: var(--transition-smooth);
+}
+
+.method-card:hover svg {
+    color: var(--cls-text);
+    transform: translate(3px, -3px);
+}
+
+.method-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    transition: var(--transition-smooth);
+}
+
+/* Cash App specific styles */
+.method-card.cashapp .method-icon {
+    background: rgba(0, 214, 50, 0.15);
+    color: #00D632;
+    border: 1px solid rgba(0, 214, 50, 0.3);
+}
+
+.method-card.cashapp:hover {
+    border-color: rgba(0, 214, 50, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 214, 50, 0.15), var(--shadow-premium);
+}
+
+.method-card.cashapp:hover .method-icon {
+    background: #00D632;
+    color: #090514;
+    box-shadow: 0 0 15px rgba(0, 214, 50, 0.4);
+}
+
+/* Venmo specific styles */
+.method-card.venmo .method-icon {
+    background: rgba(0, 140, 255, 0.15);
+    color: #008CFF;
+    border: 1px solid rgba(0, 140, 255, 0.3);
+    font-size: 1.4rem;
+    font-family: var(--font-body);
+    font-weight: 700;
+    text-transform: lowercase;
+}
+
+.method-card.venmo:hover {
+    border-color: rgba(0, 140, 255, 0.5);
+    box-shadow: 0 15px 30px rgba(0, 140, 255, 0.15), var(--shadow-premium);
+}
+
+.method-card.venmo:hover .method-icon {
+    background: #008CFF;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(0, 140, 255, 0.4);
+}
+
+.method-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.method-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--cls-text-muted);
+    font-weight: 700;
+}
+
+.method-handle {
+    font-size: 1.15rem;
+    color: var(--cls-text);
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
 /* Scroll Animation Hooks */
 .reveal {
     position: relative;
@@ -1563,7 +1891,8 @@ textarea.form-control {
         gap: 1.5rem;
     }
     
-    .programs-grid {
+    .programs-grid,
+    .events-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
@@ -1600,5 +1929,10 @@ textarea.form-control {
     
     .modal-card {
         padding: 2rem 1.5rem;
+    }
+    
+    .methods-grid {
+        flex-direction: column;
+        gap: 1rem;
     }
 }

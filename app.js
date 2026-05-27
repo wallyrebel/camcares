@@ -109,6 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const emailLink = document.getElementById('btn-confirm-donation-mail');
         emailLink.setAttribute('href', `mailto:camcaresfoundation@gmail.com?subject=Donation of $${sliderValue} Support Inquiry&body=Hi Cam,%0D%0A%0D%0AI would like to donate $${sliderValue} to support the Cam Cares Foundation. Please provide instructions on how to complete this transfer.`);
         
+        // Dynamically append the amount to the Cash App donation link for convenience
+        const cashappLink = document.getElementById('modal-cashapp-link');
+        if (cashappLink) {
+            cashappLink.setAttribute('href', `https://cash.app/$CamCaresFoundation/${sliderValue}`);
+        }
+        
         openModal('modal-donate');
     });
 
@@ -194,4 +200,54 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 2800);
 
+
+    // --- PAST EVENTS FILTER LOGIC ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const eventCards = document.querySelectorAll('.event-card');
+
+    if (filterButtons.length > 0 && eventCards.length > 0) {
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                eventCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    
+                    if (filterValue === 'all' || cardCategory === filterValue) {
+                        card.style.display = 'flex';
+                        // Force layout reflow to ensure display change registers before transitioning
+                        void card.offsetWidth;
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'scale(0.95)';
+                        
+                        // Set display to none after transition completes
+                        const handleTransitionEnd = (e) => {
+                            if (e.propertyName === 'opacity') {
+                                card.style.display = 'none';
+                                card.removeEventListener('transitionend', handleTransitionEnd);
+                            }
+                        };
+                        card.addEventListener('transitionend', handleTransitionEnd);
+                        
+                        // Safety timeout in case transitionend event is missed
+                        setTimeout(() => {
+                            if (getComputedStyle(card).opacity === '0') {
+                                card.style.display = 'none';
+                            }
+                        }, 350);
+                    }
+                });
+            });
+        });
+    }
+
 });
+
