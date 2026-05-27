@@ -1943,6 +1943,19 @@ textarea.form-control {
     color: #1877f2;
 }
 
+/* Accessibility & SEO Helpers */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
 /* Responsive Queries */
 @media (max-width: 1024px) {
     .hero-title {
